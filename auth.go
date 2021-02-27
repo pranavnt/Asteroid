@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -70,6 +71,14 @@ func addUser(username string, password string) {
 	fmt.Println(val)
 
 	p.Set(username, val)
+
+	f, _ := os.Open("./db/users.properties")
+
+	f.Truncate(0)
+	fmt.Fprintf(f, p.String())
+
+	f.Close()
+	// p.Write()
 
 	fmt.Println(p)
 }
