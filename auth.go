@@ -55,8 +55,9 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 	entry := data["username"]
 	fmt.Println(entry)
 
-	fmt.Println(addUser(data["username"].(string), data["password"].(string)))
+	// fmt.Println(addUser(data["username"].(string), data["password"].(string)))
 
+	fmt.Fprintf(w, addUser(data["username"].(string), data["password"].(string)))
 }
 
 func addUser(username string, password string) (id string) {
