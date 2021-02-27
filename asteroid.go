@@ -14,5 +14,7 @@ func main() {
 	r.HandleFunc("/signUp", signUp)
 	http.Handle("/", r)
 
+	http.ListenAndServe(":5555", nil)
+
 	fmt.Println("hello world")
 }
