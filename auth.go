@@ -30,8 +30,28 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
 
+	guess := data["password"].(string)
+
 	//entry := data[
 	//fmt.Println(entry)
+
+	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+
+	val, key := p.Get(data["username"].(string))
+
+	if key == false {
+		fmt.Fprintf(w, "User not registered")
+	}
+
+	bytes, err = ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	json.Unmarshal([]byte(string(bytes)), &data)
+
+	fmt.Println()
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
