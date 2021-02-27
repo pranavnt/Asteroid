@@ -28,25 +28,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
-}
-
-func signUp(w http.ResponseWriter, r *http.Request) {
-	var data map[string]interface{}
-
-	bytes, err := ioutil.ReadAll(r.Body)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	erro := json.Unmarshal([]byte(string(bytes)), &data)
-
-	if erro != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(data["username"])
-	fmt.Println(data["password"])
 
 	addUser("d", "d")
 }
