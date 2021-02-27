@@ -31,6 +31,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["password"])
 
 	guess := data["password"].(string)
+	fmt.Println(guess)
 
 	//entry := data[
 	//fmt.Println(entry)
@@ -43,7 +44,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "User not registered")
 	}
 
-	bytes, err = ioutil.ReadAll(r.Body)
+	bytes = []byte(val)
 
 	if err != nil {
 		fmt.Println(err)
@@ -51,7 +52,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	json.Unmarshal([]byte(string(bytes)), &data)
 
-	fmt.Println()
+	fmt.Println(data["username"])
+	fmt.Println(data["password"])
+	fmt.Println(data["userID"])
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
