@@ -44,7 +44,8 @@ func main() {
 	//update operation
 	r.HandleFunc("/api/collection/{name}/document/{doc}",updateDocument).Methods("PUT")
 
-	log.Fatal(http.ListenAndServe(":8000",r))
+	log.Fatal(http.ListenAndServe(":5555", r))
+
 }
 
 
