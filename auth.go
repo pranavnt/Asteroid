@@ -29,8 +29,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
 
-	entry := data[]
-	fmt.Println(entry)
+	//entry := data[
+	//fmt.Println(entry)
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
@@ -50,14 +50,19 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
-	
+
 	entry := data["username"]
 	fmt.Println(entry)
+
 }
 
 func addUser(username string, password string) {
 	password = hashPassword(password)
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+
+	val := "{" + "\"username\": \"" + username + "\" ,+\"password\": \"" + password + "\"}"
+
+	fmt.Println(val)
 
 	fmt.Println(p)
 }
