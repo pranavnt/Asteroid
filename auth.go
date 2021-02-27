@@ -55,15 +55,15 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 	entry := data["username"]
 	fmt.Println(entry)
 
-	addUser(data["username"].(string), data["password"].(string))
+	fmt.Println(addUser(data["username"].(string), data["password"].(string)))
 
 }
 
-func addUser(username string, password string) {
+func addUser(username string, password string) (id string) {
 	password = hashPassword(password)
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
-	id, _ := gonanoid.New()
+	id, _ = gonanoid.New()
 
 	val := "{" + "\"username\": \"" + username + "\" ,\"password\": \"" + password + "\", \"userID\": \"" + id + "\"}"
 
@@ -83,6 +83,7 @@ func addUser(username string, password string) {
 	}
 
 	fmt.Println(p)
+	return
 }
 
 func hashPassword(password string) (hashedPassword string) {
