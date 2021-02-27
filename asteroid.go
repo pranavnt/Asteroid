@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"log"
-	"fmt"
+	"encoding/json"
 	"github.com/gorilla/mux"
 )
 
@@ -16,7 +16,7 @@ func makeDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 func getCollection(w http.ResponseWriter, r *http.Request) {
-	log.Fatal(fmt.Fprintf(w,"get"))
+	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
 func getDocument(w http.ResponseWriter, r *http.Request) {

@@ -11,13 +11,6 @@ import (
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
-<<<<<<< HEAD
-	
-}
-
-func signUp(w http.ResponseWriter, r *http.Request) {
-
-=======
 	var data map[string]interface{}
 
 	bytes, err := ioutil.ReadAll(r.Body)
@@ -57,5 +50,4 @@ func checkPassword(hashedPassword string, guess string) bool {
 	}
 
 	return true
->>>>>>> 90b740f40eb11db13e0257abec5b1448013c361f
 }
