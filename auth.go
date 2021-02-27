@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/magiconair/properties"
+	gonanoid "github.com/matoous/go-nanoid/v2"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -54,13 +55,23 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 	entry := data["username"]
 	fmt.Println(entry)
 
+	addUser(data["username"].(string), data["password"].(string))
+
 }
 
 func addUser(username string, password string) {
 	password = hashPassword(password)
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
-	val := "{" + "\"username\": \"" + username + "\" ,+\"password\": \"" + password + "\"}"
+	id, err := gonanoid.New()
+
+	val := "{" + "\"username\": \"" + username + "\" ,\"password\": \"" + password + "\", \"userID\": \"" + id + "\"}"
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(id)
 
 	fmt.Println(val)
 
