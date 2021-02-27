@@ -29,7 +29,29 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["password"])
 }
 
-func signUp(w http.ResponseWriter, r *http.Request) {}
+func signUp(w http.ResponseWriter, r *http.Request) {
+	var data map[string]interface{}
+
+	bytes, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	erro := json.Unmarshal([]byte(string(bytes)), &data)
+
+	if erro != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(data["username"])
+	fmt.Println(data["password"])
+}
+
+func addUser(username string, password string) {
+	password = hashPassword(password)
+
+}
 
 func hashPassword(password string) (hashedPassword string) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MinCost)
