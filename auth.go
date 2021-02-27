@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -8,7 +11,13 @@ import (
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
+	var data map[string]interface{}
+	err := json.Unmarshal([]byte(string(ioutil.ReadAll(r.Body))), &data)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(data)
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {}
