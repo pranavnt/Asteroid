@@ -25,7 +25,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(data)
+	fmt.Println(data["username"])
+	fmt.Println(data["password"])
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {}
