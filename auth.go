@@ -63,17 +63,13 @@ func addUser(username string, password string) {
 	password = hashPassword(password)
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
-	id, err := gonanoid.New()
+	id, _ := gonanoid.New()
 
 	val := "{" + "\"username\": \"" + username + "\" ,\"password\": \"" + password + "\", \"userID\": \"" + id + "\"}"
 
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println(id)
-
 	fmt.Println(val)
+
+	p.Set(username, val)
 
 	fmt.Println(p)
 }
