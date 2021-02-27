@@ -29,12 +29,36 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
 
-	addUser("d", "d")
+	entry := data[]
+	fmt.Println(entry)
+}
+
+func signUp(w http.ResponseWriter, r *http.Request) {
+	var data map[string]interface{}
+
+	bytes, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	erro := json.Unmarshal([]byte(string(bytes)), &data)
+
+	if erro != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(data["username"])
+	fmt.Println(data["password"])
+	
+	entry := data["username"]
+	fmt.Println(entry)
 }
 
 func addUser(username string, password string) {
 	password = hashPassword(password)
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+
 	fmt.Println(p)
 }
 
