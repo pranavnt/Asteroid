@@ -12,11 +12,19 @@ import (
 
 func login(w http.ResponseWriter, r *http.Request) {
 	var data map[string]interface{}
-	err := json.Unmarshal([]byte(string(ioutil.ReadAll(r.Body))), &data)
+
+	bytes, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
+		fmt.Println(err)
+	}
+
+	erro := json.Unmarshal([]byte(string(bytes)), &data)
+
+	if erro != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Println(data)
 }
 
