@@ -21,20 +21,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	erro := json.Unmarshal([]byte(string(bytes)), &data)
-
-	if erro != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(data["username"])
-	fmt.Println(data["password"])
+	json.Unmarshal([]byte(string(bytes)), &data)
 
 	guess := data["password"].(string)
 	fmt.Println(guess)
-
-	//entry := data[
-	//fmt.Println(entry)
 
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
@@ -55,6 +45,12 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
 	fmt.Println(data["userID"])
+
+	if checkPassword(data["password"].(string), guess) {
+		fmt.Fprintf(w, data["userID"].(string))
+	} else {
+		fmt.Fprint(w, "Incorrect password")
+	}
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
