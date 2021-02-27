@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/magiconair/properties"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -27,9 +28,15 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
+
+	addUser("d", "d")
 }
 
-func signUp(w http.ResponseWriter, r *http.Request) {}
+func addUser(username string, password string) {
+	password = hashPassword(password)
+	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+	fmt.Println(p)
+}
 
 func hashPassword(password string) (hashedPassword string) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MinCost)
