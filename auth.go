@@ -7,17 +7,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/magiconair/properties"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
-<<<<<<< HEAD
-	
-}
-
-func signUp(w http.ResponseWriter, r *http.Request) {
-
-=======
 	var data map[string]interface{}
 
 	bytes, err := ioutil.ReadAll(r.Body)
@@ -53,11 +47,14 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(data["username"])
 	fmt.Println(data["password"])
+
+	addUser("d", "d")
 }
 
 func addUser(username string, password string) {
 	password = hashPassword(password)
-
+	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+	fmt.Println(p)
 }
 
 func hashPassword(password string) (hashedPassword string) {
@@ -79,5 +76,4 @@ func checkPassword(hashedPassword string, guess string) bool {
 	}
 
 	return true
->>>>>>> 90b740f40eb11db13e0257abec5b1448013c361f
 }
