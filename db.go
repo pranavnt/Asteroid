@@ -50,13 +50,8 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "data")
 }
 
-func isValidUid(uid string) bool {
-	fmt.Println(uid)
-	return true
-}
-
 func addDocument(collection string, key string, value string) {
-	p := properties.MustLoadFile(("db/collections" + collection + ".properties"), properties.UTF8)
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 	p.Set(key, value)
 	return
 }

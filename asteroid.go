@@ -10,23 +10,14 @@ import (
 	"github.com/magiconair/properties"
 )
 
-func makeCollection(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func makeDocument(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func getCollection(w http.ResponseWriter, r *http.Request) {
-	
 
 	// vars := mux.Vars(r)
 	params := r.URL.Query()
 	// collection := vars["name"]
 	usrId := params["userID"][0]
 	fmt.Println(hasAccess(usrId))
-	
+
 	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
@@ -39,7 +30,7 @@ func updateDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 //returns if user has access to said data
-func hasAccess(usrID string) bool{
+func hasAccess(usrID string) bool {
 	var data map[string]interface{}
 
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
@@ -55,13 +46,12 @@ func hasAccess(usrID string) bool{
 
 		bytes := []byte(val)
 		json.Unmarshal([]byte(string(bytes)), &data)
-		
-		if(data["userID"]==usrID){
+
+		if data["userID"] == usrID {
 			return true
 		}
-	 }
-	 return false
-	
+	}
+	return false
 }
 
 func main() {
