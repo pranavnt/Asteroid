@@ -29,5 +29,4 @@ func main() {
 	r.HandleFunc("/api/collection/{name}/document/delete/{doc}", deleteDocument)
 
 	log.Fatal(http.ListenAndServe(":5555", r))
-
 }

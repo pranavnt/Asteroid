@@ -85,12 +85,20 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	collection := vars["name"]
-	// uid := vars["uid"]
+	uid := vars["uid"]
 
 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 
 	for _, key := range p.Keys() {
-		fmt.Println(key)
+		val, _ := p.Get(key)
+
+		var data map[string]interface{}
+
+		json.Unmarshal([]byte(val), &data)
+
+		fmt.Println(data["uid"].(string) == uid)
+
+		fmt.Println(val)
 	}
 }
 
