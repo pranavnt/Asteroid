@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
+	"github.com/magiconair/properties"
 	"github.com/gorilla/mux"
 )
 
@@ -18,11 +18,36 @@ func makeDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 func getCollection(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
+	var data map[string]interface{}
+
+	// vars := mux.Vars(r)
 	params := r.URL.Query()
-	fmt.Println(vars)
-	fmt.Println(params)
-	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	// collection := vars["name"]
+	usrId := params["userID"][0]
+
+
+	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+	keys := p.Keys()
+	fmt.Println(keys)
+	
+	for a := 0; a < len(keys); a++ {
+		val, key := p.Get(keys[a])
+		
+		if key == false {
+			fmt.Fprintf(w, "User not registered")
+		}
+
+		bytes := []byte(val)
+		json.Unmarshal([]byte(string(bytes)), &data)
+		
+		fmt.Println(data["userID"])
+		if(data["userID"]==usrId){
+			fmt.Fprintf(w,"Access Granted")
+		}
+	 } 
+	
+	
+	 json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
 func getDocument(w http.ResponseWriter, r *http.Request) {
@@ -49,6 +74,9 @@ func main() {
 
 	//update operation
 	r.HandleFunc("/api/collection/{name}/document/{doc}", updateDocument).Methods("PUT")
+
+	//signup
+	r.HandleFunc("/signup", signUp).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":5555", r))
 
