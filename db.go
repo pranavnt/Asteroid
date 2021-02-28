@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 
@@ -17,5 +19,21 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	collectionName := mux.Vars(r)["name"]
 	filePath := "db/collections/" + collectionName + ".properties"
 
-	fmt.Fprintf(w, filePath)
+	fmt.Println(filePath)
+
+	var req map[string]interface{}
+
+	bytes, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(filePath)
+
+	json.Unmarshal([]byte(string(bytes)), &req)
+
+	uid := req["uid"]
+
+	fmt.Fprintf(w, uid)
 }
