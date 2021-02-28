@@ -18,13 +18,28 @@ func makeDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 func getCollection(w http.ResponseWriter, r *http.Request) {
-	var data map[string]interface{}
+	
 
 	// vars := mux.Vars(r)
 	params := r.URL.Query()
 	// collection := vars["name"]
 	usrId := params["userID"][0]
+	fmt.Println(hasAccess(usrId))
+	
+	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+}
 
+func getDocument(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func updateDocument(w http.ResponseWriter, r *http.Request) {
+
+}
+
+//returns if user has access to said data
+func hasAccess(usrID string) bool{
+	var data map[string]interface{}
 
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 	keys := p.Keys()
@@ -34,28 +49,18 @@ func getCollection(w http.ResponseWriter, r *http.Request) {
 		val, key := p.Get(keys[a])
 		
 		if key == false {
-			fmt.Fprintf(w, "User not registered")
+			return false
 		}
 
 		bytes := []byte(val)
 		json.Unmarshal([]byte(string(bytes)), &data)
 		
-		fmt.Println(data["userID"])
-		if(data["userID"]==usrId){
-			fmt.Fprintf(w,"Access Granted")
+		if(data["userID"]==usrID){
+			return true
 		}
-	 } 
+	 }
+	 return false
 	
-	
-	 json.NewEncoder(w).Encode(map[string]bool{"ok": true})
-}
-
-func getDocument(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func updateDocument(w http.ResponseWriter, r *http.Request) {
-
 }
 
 func main() {
