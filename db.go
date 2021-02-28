@@ -39,13 +39,12 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 
 	if isValidUid(uid.(string)) {
 		req["_id"] = id
+
 	}
 
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	fmt.Println(data)
 
 	fmt.Fprintf(w, "data")
 }
@@ -53,4 +52,8 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 func isValidUid(uid string) bool {
 	fmt.Println(uid)
 	return true
+}
+
+func addDocument(key string, value string) {
+	return
 }
