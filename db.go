@@ -42,6 +42,7 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	if hasAccess(uid.(string)) {
 		req["_id"] = id
 
+		fmt.Println(req)
 	}
 
 	if err != nil {
