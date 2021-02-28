@@ -49,6 +49,9 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 		req["_id"] = id
 
 		fmt.Println(req)
+		for k, _ := range req {
+			fmt.Println(k)
+		}
 	}
 
 	if err != nil {
