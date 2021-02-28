@@ -15,13 +15,7 @@ import (
 // CREATE
 func createCollection(w http.ResponseWriter, r *http.Request) {
 	name := mux.Vars(r)["name"]
-	params := r.URL.Query()
-	usrId := params["userID"][0]
-	if(hasAccess(usrId)){
-		os.Create("db/collections/" + name + ".properties")
-		json.NewEncoder(w).Encode(map[string]bool{"status": true})
-	}
-	
+	os.Create("db/collections/" + name + ".properties")
 }
 
 func createDocument(w http.ResponseWriter, r *http.Request) {
