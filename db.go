@@ -6,10 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-<<<<<<< HEAD
-=======
 
->>>>>>> a226434ee8707180a203999acf78209c316919d6
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -124,9 +121,6 @@ func hasAccess(usrID string) bool {
 	return false
 }
 
-<<<<<<< HEAD
-=======
 // func convertJson() string {
 
 // }
->>>>>>> a226434ee8707180a203999acf78209c316919d6
