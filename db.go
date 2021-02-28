@@ -66,8 +66,6 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 
 // READ
 func readDocument(w http.ResponseWriter, r *http.Request) {
-	// params := r.URL.Query()
-	// usrId := params["userID"][0]
 	vars := mux.Vars(r)
 	collection := vars["name"]
 	doc := vars["doc"]
