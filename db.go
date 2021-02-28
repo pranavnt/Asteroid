@@ -6,7 +6,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+<<<<<<< HEAD
+=======
 
+>>>>>>> a226434ee8707180a203999acf78209c316919d6
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -68,18 +71,6 @@ func addDocument(collection string, key string, value string) {
 }
 
 // READ
-// func readCollection(w http.ResponseWriter, r *http.Request) {
-// 	// params := r.URL.Query()
-// 	// usrId := params["userID"][0]
-// 	vars := mux.Vars(r)
-// 	collection := vars["name"]
-
-// 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
-// 	fmt.Println(pupd)
-
-// 	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
-// }
-
 func readDocument(w http.ResponseWriter, r *http.Request) {
 	// params := r.URL.Query()
 	// usrId := params["userID"][0]
@@ -133,6 +124,9 @@ func hasAccess(usrID string) bool {
 	return false
 }
 
+<<<<<<< HEAD
+=======
 // func convertJson() string {
 
 // }
+>>>>>>> a226434ee8707180a203999acf78209c316919d6
