@@ -60,22 +60,21 @@ func updateDocument(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	r := mux.NewRouter()
+
+	// Auth routes
 	r.HandleFunc("/login", login)
 	r.HandleFunc("/signUp", signUp)
 
-	//write operations
+	// CREATE operations
 	r.HandleFunc("/api/collection/{name}", createCollection).Methods("POST")
 	r.HandleFunc("/api/collection/{name}/document", createDocument).Methods("POST")
 
-	//read operations
+	// READ operations
 	r.HandleFunc("/api/collection/{name}", getCollection).Methods("GET")
 	r.HandleFunc("/api/collection/{name}/document/{doc}", getDocument).Methods("GET")
 
 	//update operation
 	r.HandleFunc("/api/collection/{name}/document/{doc}", updateDocument).Methods("PUT")
-
-	//signup
-	r.HandleFunc("/signup", signUp).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":5555", r))
 

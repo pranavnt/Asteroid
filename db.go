@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -14,7 +15,7 @@ func createCollection(w http.ResponseWriter, r *http.Request) {
 
 func createDocument(w http.ResponseWriter, r *http.Request) {
 	collectionName := mux.Vars(r)["name"]
-	docName := mux.Vars(r)["doc"]
-	filePath = "db/collections/" + collectionName + ".properties"
+	filePath := "db/collections/" + collectionName + ".properties"
 
+	fmt.Fprintf(w, filePath)
 }
