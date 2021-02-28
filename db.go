@@ -82,8 +82,23 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(json.RawMessage(val))
 }
 
+func readDocumentsById(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	collection := vars["name"]
+	// uid := vars["uid"]
+
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+
+	for _, key := range p.Keys() {
+		fmt.Println(key)
+	}
+}
+
 // UPDATE
 func updateDocument(w http.ResponseWriter, r *http.Request) {
+	// vars := mux.Vars(r)
+	// collection := vars["name"]
+	// doc := vars["doc"]
 
 }
 
