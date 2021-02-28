@@ -161,6 +161,9 @@ func deleteDocument(w http.ResponseWriter, r *http.Request) {
 	if data["uid"] == uid {
 		p.Delete(doc)
 	}
+
+	ioutil.WriteFile(("db/collections/" + collection + ".properties"), []byte(p.String()), 0777)
+
 }
 
 //returns if user has access to said data
