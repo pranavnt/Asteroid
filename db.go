@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
@@ -60,6 +61,8 @@ func isValidUid(uid string) bool {
 	return true
 }
 
-func addDocument(key string, value string) {
+func addDocument(collection string, key string, value string) {
+	p := properties.MustLoadFile(("db/collections" + collection + ".properties"), properties.UTF8)
+	p.Set(key, value)
 	return
 }
