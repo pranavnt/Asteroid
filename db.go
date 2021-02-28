@@ -90,7 +90,7 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(val)
-	json.NewEncoder(w).Encode(val)
+	json.NewEncoder(w).Encode(json.RawMessage(val))
 
 }
 
