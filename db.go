@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
@@ -79,8 +80,8 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(val)
-	json.NewEncoder(w).Encode(json.RawMessage(val))
 
+	json.NewEncoder(w).Encode(json.RawMessage(val))
 }
 
 // UPDATE
@@ -125,6 +126,10 @@ func dictToJson(dict map[string]interface{}) string {
 	for k, v := range dict {
 		hold += fmt.Sprintf("\"%s\":\"%s\",", k, v)
 	}
+
+	fmt.Println(hold)
+
+	hold = strings.TrimSuffix(hold, ",")
 
 	hold += "}"
 	fmt.Println(hold)
