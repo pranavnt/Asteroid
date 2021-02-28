@@ -40,7 +40,7 @@ func main() {
 	r.HandleFunc("/signUp", signUp)
 
 	//write operations
-	r.HandleFunc("/api/collection/{name}", makeCollection).Methods("POST")
+	r.HandleFunc("/api/collection/{name}", createCollection).Methods("POST")
 	r.HandleFunc("/api/collection/{name}/document", makeDocument).Methods("POST")
 
 	//read operations
