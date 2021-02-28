@@ -12,6 +12,7 @@ import (
 	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
+// CREATE
 func createCollection(w http.ResponseWriter, r *http.Request) {
 	name := mux.Vars(r)["name"]
 	os.Create("db/collections/" + name + ".properties")
@@ -38,7 +39,7 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	id, _ := gonanoid.New()
 	uid := req["uid"]
 
-	if isValidUid(uid.(string)) {
+	if hasAccess(uid.(string)) {
 		req["_id"] = id
 
 	}
@@ -54,4 +55,55 @@ func addDocument(collection string, key string, value string) {
 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 	p.Set(key, value)
 	return
+}
+
+// READ
+func readCollection(w http.ResponseWriter, r *http.Request) {
+
+	// vars := mux.Vars(r)
+	params := r.URL.Query()
+	// collection := vars["name"]
+	usrId := params["userID"][0]
+	fmt.Println(hasAccess(usrId))
+
+	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+}
+
+func readDocument(w http.ResponseWriter, r *http.Request) {
+
+}
+
+// UPDATE
+func updateDocument(w http.ResponseWriter, r *http.Request) {
+
+}
+
+// DELETE
+func deleteDocument(w http.ResponseWriter, r *http.Request) {
+
+}
+
+//returns if user has access to said data
+func hasAccess(usrID string) bool {
+	var data map[string]interface{}
+
+	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
+	keys := p.Keys()
+	fmt.Println(keys)
+
+	for a := 0; a < len(keys); a++ {
+		val, key := p.Get(keys[a])
+
+		if key == false {
+			return false
+		}
+
+		bytes := []byte(val)
+		json.Unmarshal([]byte(string(bytes)), &data)
+
+		if data["userID"] == usrID {
+			return true
+		}
+	}
+	return false
 }
