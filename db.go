@@ -112,10 +112,33 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 
 // UPDATE
 func updateDocument(w http.ResponseWriter, r *http.Request) {
-	// vars := mux.Vars(r)
-	// collection := vars["name"]
-	// doc := vars["doc"]
+	vars := mux.Vars(r)
+	collection := vars["name"]
+	doc := vars["doc"]
 
+	var req map[string]interface{}
+
+	bytes, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	json.Unmarshal([]byte(string(bytes)), &req)
+
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+
+	val, _ := p.Get(doc)
+
+	var data map[string]interface{}
+
+	json.Unmarshal([]byte(val), &data)
+
+	if req["uid"] == data["uid"] {
+		p.Set(doc, dictToJson(req))
+	}
+
+	ioutil.WriteFile(("db/collections/" + collection + ".properties"), []byte(p.String()), 0777)
 }
 
 // DELETE
