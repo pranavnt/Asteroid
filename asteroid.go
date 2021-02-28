@@ -26,7 +26,7 @@ func main() {
 	r.HandleFunc("/api/collection/{name}/document/update/{doc}", updateDocument)
 
 	// DELETE operation
-	r.HandleFunc("/api/collection/{name}/document/delete/{doc}", deleteDocument)
+	r.HandleFunc("/api/collection/{name}/document/delete/{doc}/{uid}", deleteDocument)
 
 	log.Fatal(http.ListenAndServe(":5555", r))
 }

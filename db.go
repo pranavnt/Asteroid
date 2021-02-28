@@ -134,7 +134,7 @@ func updateDocument(w http.ResponseWriter, r *http.Request) {
 
 	json.Unmarshal([]byte(val), &data)
 
-	if req["uid"] == data["uid"] {
+	if req["_id"] == data["_id"] {
 		p.Set(doc, dictToJson(req))
 	}
 
@@ -143,6 +143,22 @@ func updateDocument(w http.ResponseWriter, r *http.Request) {
 
 // DELETE
 func deleteDocument(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	collection := vars["name"]
+	doc := vars["doc"]
+	uid := vars["uid"]
+
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+
+	val, _ := p.Get(doc)
+
+	var data map[string]interface{}
+
+	json.Unmarshal([]byte(val), &data)
+
+	if data["uid"] == uid {
+		p.Delete(doc)
+	}
 
 }
 
