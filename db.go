@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-
+	"strings"
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -15,7 +15,13 @@ import (
 // CREATE
 func createCollection(w http.ResponseWriter, r *http.Request) {
 	name := mux.Vars(r)["name"]
-	os.Create("db/collections/" + name + ".properties")
+	params := r.URL.Query()
+	usrId := params["userID"][0]
+	if(hasAccess(usrId)){
+		os.Create("db/collections/" + name + ".properties")
+		json.NewEncoder(w).Encode(map[string]bool{"status": true})
+	}
+	
 }
 
 func createDocument(w http.ResponseWriter, r *http.Request) {
@@ -59,18 +65,33 @@ func addDocument(collection string, key string, value string) {
 }
 
 // READ
-func readCollection(w http.ResponseWriter, r *http.Request) {
+// func readCollection(w http.ResponseWriter, r *http.Request) {
+// 	// params := r.URL.Query()
+// 	// usrId := params["userID"][0]
+// 	vars := mux.Vars(r)
+// 	collection := vars["name"]
+	
+// 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+// 	fmt.Println(pupd)
 
-	// vars := mux.Vars(r)
-	params := r.URL.Query()
-	// collection := vars["name"]
-	usrId := params["userID"][0]
-	fmt.Println(hasAccess(usrId))
-
-	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
-}
+// 	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+// }
 
 func readDocument(w http.ResponseWriter, r *http.Request) {
+	// params := r.URL.Query()
+	// usrId := params["userID"][0]
+	vars := mux.Vars(r)
+	collection := vars["name"]
+	doc :=vars["doc"]
+	
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+	val, key := p.Get(doc)
+	if(key==false){
+		fmt.Fprintf(w,"does not exist")
+	}
+
+	fmt.Println(val)
+	json.NewEncoder(w).Encode(val)
 
 }
 
@@ -108,3 +129,7 @@ func hasAccess(usrID string) bool {
 	}
 	return false
 }
+
+// func convertJson() string {
+
+// }

@@ -19,7 +19,6 @@ func main() {
 	r.HandleFunc("/api/collection/{name}/create/document", createDocument)
 
 	// READ operations
-	r.HandleFunc("/api/collection/{name}/all", readCollection)
 	r.HandleFunc("/api/collection/{name}/document/read/{doc}", readDocument)
 
 	// UPDATE operation
