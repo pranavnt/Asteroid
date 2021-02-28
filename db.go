@@ -51,6 +51,7 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(req)
 		for k, _ := range req {
 			fmt.Println(k)
+			dictToJson(req)
 		}
 	}
 
@@ -121,6 +122,15 @@ func hasAccess(usrID string) bool {
 	return false
 }
 
-// func convertJson() string {
+func dictToJson(dict map[string]interface{}) string {
+	var hold = ""
+	hold += "{"
 
-// }
+	for k, v := range dict {
+		hold += fmt.Sprintf("\"%s\":\"%s\",", k, v)
+	}
+
+	hold += "}"
+	fmt.Println(hold)
+	return hold
+}
