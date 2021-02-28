@@ -102,7 +102,10 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 		documents = append(documents, dictToJson(data))
 
 	}
-	fmt.Println(documents)
+
+	respData := "{ \"data\": [" + strings.Join(documents, ",") + "]}"
+
+	fmt.Println(respData)
 }
 
 // UPDATE
