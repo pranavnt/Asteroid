@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"
+
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -17,11 +17,11 @@ func createCollection(w http.ResponseWriter, r *http.Request) {
 	name := mux.Vars(r)["name"]
 	params := r.URL.Query()
 	usrId := params["userID"][0]
-	if(hasAccess(usrId)){
+	if hasAccess(usrId) {
 		os.Create("db/collections/" + name + ".properties")
 		json.NewEncoder(w).Encode(map[string]bool{"status": true})
 	}
-	
+
 }
 
 func createDocument(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +70,7 @@ func addDocument(collection string, key string, value string) {
 // 	// usrId := params["userID"][0]
 // 	vars := mux.Vars(r)
 // 	collection := vars["name"]
-	
+
 // 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 // 	fmt.Println(pupd)
 
@@ -82,12 +82,12 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	// usrId := params["userID"][0]
 	vars := mux.Vars(r)
 	collection := vars["name"]
-	doc :=vars["doc"]
-	
+	doc := vars["doc"]
+
 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 	val, key := p.Get(doc)
-	if(key==false){
-		fmt.Fprintf(w,"does not exist")
+	if key == false {
+		fmt.Fprintf(w, "does not exist")
 	}
 
 	fmt.Println(val)
