@@ -24,7 +24,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal([]byte(string(bytes)), &data)
 
 	guess := data["password"].(string)
-	fmt.Println(guess)
 
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
@@ -41,10 +40,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.Unmarshal([]byte(string(bytes)), &data)
-
-	fmt.Println(data["username"])
-	fmt.Println(data["password"])
-	fmt.Println(data["userID"])
 
 	if checkPassword(data["password"].(string), guess) {
 		fmt.Fprintf(w, data["userID"].(string))
@@ -68,13 +63,7 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(data["username"])
-	fmt.Println(data["password"])
-
-	entry := data["username"]
-	fmt.Println(entry)
-
-	// fmt.Println(addUser(data["username"].(string), data["password"].(string)))
+	fmt.Println("Username: " + data["username"].(string))
 
 	fmt.Fprintf(w, addUser(data["username"].(string), data["password"].(string)))
 }
@@ -84,25 +73,20 @@ func addUser(username string, password string) (id string) {
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 
 	id, _ = gonanoid.New()
+	fmt.Println("Salt hashed password: " + password)
+
+	fmt.Println("User ID: " + id)
 
 	val := "{" + "\"username\": \"" + username + "\" ,\"password\": \"" + password + "\", \"userID\": \"" + id + "\"}"
-
-	fmt.Println(val)
 
 	p.Set(username, val)
 
 	err := ioutil.WriteFile("db/users.properties", []byte(p.String()), 0777)
 
-	// f, _ := os.Open("db/users.properties")
-	// f.Truncate(0)
-	// fmt.Fprintf(f, p.String())
-	// f.Close()
-
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(p)
 	return
 }
 
