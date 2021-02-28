@@ -23,7 +23,7 @@ func main() {
 	r.HandleFunc("/api/collection/{name}/document/read/{doc}", readDocument)
 
 	// UPDATE operation
-	r.HandleFunc("/api/collection/{name}/document/{doc}", updateDocument).Methods("PUT")
+	r.HandleFunc("/api/collection/{name}/document/update/{doc}", updateDocument)
 
 	// DELETE operation
 	r.HandleFunc("/api/collection/{name}/document/delete/{doc}", deleteDocument)
