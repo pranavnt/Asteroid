@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
 func createCollection(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +34,23 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 
 	json.Unmarshal([]byte(string(bytes)), &req)
 
+	id, _ := gonanoid.New()
 	uid := req["uid"]
 
-	fmt.Fprintf(w, uid)
+	if isValidUid(uid.(string)) {
+		req["_id"] = id
+	}
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(data)
+
+	fmt.Fprintf(w, "data")
+}
+
+func isValidUid(uid string) bool {
+	fmt.Println(uid)
+	return true
 }
