@@ -46,13 +46,14 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	uid := req["uid"]
 
 	if hasAccess(uid.(string)) {
+		p := properties.MustLoadFile(filePath, properties.UTF8)
 		req["_id"] = id
 
 		fmt.Println(req)
-		for k, _ := range req {
-			fmt.Println(k)
-			dictToJson(req)
-		}
+		val := dictToJson(req)
+		p.Set(id, val)
+
+		ioutil.WriteFile(filePath, []byte(p.String()), 0777)
 	}
 
 	if err != nil {
@@ -60,12 +61,6 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, "data")
-}
-
-func addDocument(collection string, key string, value string) {
-	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
-	p.Set(key, value)
-	return
 }
 
 // READ
