@@ -21,6 +21,7 @@ func main() {
 	// READ operations
 	r.HandleFunc("/api/collection/{name}/document/read/{doc}", readDocument)
 	r.HandleFunc("/api/collection/{name}/document/read/user/{uid}", readDocumentsById)
+	r.HandleFunc("/api/collection/{name}/all", readAllDocuments)
 
 	// UPDATE operation
 	r.HandleFunc("/api/collection/{name}/document/update/{doc}", updateDocument)

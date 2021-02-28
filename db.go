@@ -97,7 +97,32 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 
 		json.Unmarshal([]byte(val), &data)
 
-		fmt.Println(data["uid"].(string) == uid)
+		if data["uid"].(string) == uid {
+			documents = append(documents, dictToJson(data))
+		}
+
+	}
+
+	respData := "{ \"data\": [" + strings.Join(documents, ",") + "]}"
+
+	fmt.Println(respData)
+	json.NewEncoder(w).Encode(json.RawMessage(respData))
+
+}
+
+func readAllDocuments(w http.ResponseWriter, r *http.Request) {
+	var documents []string
+	vars := mux.Vars(r)
+	collection := vars["name"]
+
+	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
+
+	for _, key := range p.Keys() {
+		val, _ := p.Get(key)
+
+		var data map[string]interface{}
+
+		json.Unmarshal([]byte(val), &data)
 
 		documents = append(documents, dictToJson(data))
 
@@ -107,7 +132,6 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(respData)
 	json.NewEncoder(w).Encode(json.RawMessage(respData))
-
 }
 
 // UPDATE
