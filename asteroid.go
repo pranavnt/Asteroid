@@ -5,16 +5,25 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 	"github.com/magiconair/properties"
 )
 
 func makeCollection(w http.ResponseWriter, r *http.Request) {
+	// vars := mux.Vars(r)
+	params := r.URL.Query()
+	// collection := vars["name"]
+	usrId := params["userID"][0]
+	fmt.Println("ey")
+	if(hasAccess(usrId)){
+		createCollection(w,r)
+		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	}
 
 }
 
 func makeDocument(w http.ResponseWriter, r *http.Request) {
+
 
 }
 
@@ -74,7 +83,7 @@ func main() {
 
 	// CREATE operations
 	r.HandleFunc("/api/collection/{name}", createCollection).Methods("POST")
-	r.HandleFunc("/api/collection/{name}/document", createDocument).Methods("POST")
+	r.HandleFunc("/api/collection/{name}/document/{name}", createDocument).Methods("POST")
 
 	// READ operations
 	r.HandleFunc("/api/collection/{name}", getCollection).Methods("GET")
