@@ -83,6 +83,7 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 func readDocumentsById(w http.ResponseWriter, r *http.Request) {
+	var documents []string
 	vars := mux.Vars(r)
 	collection := vars["name"]
 	uid := vars["uid"]
@@ -98,8 +99,10 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Println(data["uid"].(string) == uid)
 
-		fmt.Println(val)
+		documents = append(documents, dictToJson(data))
+
 	}
+	fmt.Println(documents)
 }
 
 // UPDATE
