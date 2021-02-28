@@ -106,6 +106,8 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 	respData := "{ \"data\": [" + strings.Join(documents, ",") + "]}"
 
 	fmt.Println(respData)
+	json.NewEncoder(w).Encode(json.RawMessage(respData))
+
 }
 
 // UPDATE
