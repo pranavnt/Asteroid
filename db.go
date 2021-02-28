@@ -60,7 +60,7 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	fmt.Fprintf(w, "data")
+	fmt.Fprintf(w, id)
 }
 
 // READ
@@ -73,6 +73,7 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 
 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 	val, key := p.Get(doc)
+
 	if key == false {
 		fmt.Fprintf(w, "does not exist")
 	}
