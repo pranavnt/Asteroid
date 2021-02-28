@@ -65,7 +65,7 @@ func main() {
 
 	//write operations
 	r.HandleFunc("/api/collection/{name}", createCollection).Methods("POST")
-	r.HandleFunc("/api/collection/{name}/document", makeDocument).Methods("POST")
+	r.HandleFunc("/api/collection/{name}/document", createDocument).Methods("POST")
 
 	//read operations
 	r.HandleFunc("/api/collection/{name}", getCollection).Methods("GET")
