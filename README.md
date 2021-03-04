@@ -6,13 +6,19 @@
 
 ## Design Goals 🎨
 
-### Simplicity
+### Developer Experience
 
-### Add more
+### Simplicity
 
 ## Documentation 📝
 
 ### Create
+
+#### Create a collection
+
+In order to create a collection, run the command `asteroid create collection collectionName` into terminal, as a collection with `collectionName` will be created. This can only be done from the command line for now, but I'm hoping to allow devs to be able to do this through an API in the future.
+
+#### Create a document
 
 ### Read
 
