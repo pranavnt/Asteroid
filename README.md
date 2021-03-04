@@ -8,6 +8,14 @@
 
 ### Simplicity
 
-###
+### Add more
 
 ## Documentation 📝
+
+### Create
+
+### Read
+
+### Update
+
+### Delete
