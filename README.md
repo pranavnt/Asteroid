@@ -39,6 +39,18 @@ You should post the json you want to be stored in that document, with the key of
 
 ### Read
 
+#### Get Document by ID
+
+#### Get Documents by User ID
+
 ### Update
 
+#### Update element in collection
+
+#### Update collection name
+
 ### Delete
+
+#### Delete documents from collection
+
+#### Delete Collection
