@@ -41,7 +41,15 @@ You should post the json you want to be stored in that document, with the key of
 
 #### Get Document by ID
 
+To get a document by its id, send a GET request to `/api/collection/{collectionName}/document/read/{_id}`, where `_id` is the document id.
+
 #### Get Documents by User ID
+
+`/api/collection/{collectionName}/document/read/user/{uid}`
+
+#### Get All Documents from collection
+
+`/api/collection/{collectionName}/all`
 
 ### Update
 
