@@ -55,7 +55,19 @@ To get all documents from a collection, send a GET request to `/api/collection/{
 
 #### Update element in collection
 
+To update an element in a collection, send a POST request to `/api/collection/todos/document/update/{_id}`, where `_id` is the document id. You need to post the new JSON that should be stored in that document along with the user id. Here is sample JSON that can be posted:
+
+```json
+{
+  "uid": "userid",
+  "data1": "world",
+  "key2": "hello"
+}
+```
+
 #### Update collection name
+
+To update the name of a collection, run the command `asteroid update collection oldName newName`, where `oldName` is the name of the collection, and `newName` is the new name!
 
 ### Delete
 
