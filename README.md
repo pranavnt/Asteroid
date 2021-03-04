@@ -4,11 +4,11 @@
 </p>
 <h2 align="center">An Intuitive database built for rapid prototyping and ease of use!</h2>
 
-## Design Goals 🎨
+## Installation 💻
 
-### Developer Experience
-
-### Simplicity
+1. Clone the repo - `git clone https://github.com/pranavnt/Asteroid && cd Asteroid`
+2. Install dependencies - `go get`
+3. Build asteroid - `go build asteroid.go`
 
 ## Documentation 📝
 
@@ -100,3 +100,13 @@ To delete a document from a collection, send a GET request to `/api/collection/t
 #### Delete Collection
 
 To delete a collection, run the command `asteroid delete collection collectionName` into terminal, and the collection with the name `collectionName` will be deleted. You can only do this through the CLI right now, but I'm hoping to make this accessible via an API in the future.
+
+## Design Goals 🎨
+
+### Developer Experience
+
+d
+
+### Simplicity
+
+When building full stack apps, I often get tired of building an API, which interacts with a database for really simple operations.
