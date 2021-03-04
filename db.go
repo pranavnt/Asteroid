@@ -29,8 +29,6 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	collectionName := mux.Vars(r)["name"]
 	filePath := "db/collections/" + collectionName + ".properties"
 
-	fmt.Println(filePath)
-
 	var req map[string]interface{}
 
 	bytes, err := ioutil.ReadAll(r.Body)
@@ -38,8 +36,6 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	fmt.Println(filePath)
 
 	json.Unmarshal([]byte(string(bytes)), &req)
 
@@ -50,7 +46,6 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 		p := properties.MustLoadFile(filePath, properties.UTF8)
 		req["_id"] = id
 
-		fmt.Println(req)
 		val := dictToJson(req)
 		p.Set(id, val)
 
@@ -60,6 +55,8 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	fmt.Println("Document created!!")
 
 	fmt.Fprintf(w, id)
 }
@@ -76,8 +73,6 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	if key == false {
 		fmt.Fprintf(w, "does not exist")
 	}
-
-	fmt.Println(val)
 
 	json.NewEncoder(w).Encode(json.RawMessage(val))
 }
@@ -105,7 +100,6 @@ func readDocumentsById(w http.ResponseWriter, r *http.Request) {
 
 	respData := "{ \"data\": [" + strings.Join(documents, ",") + "]}"
 
-	fmt.Println(respData)
 	json.NewEncoder(w).Encode(json.RawMessage(respData))
 
 }
@@ -130,7 +124,6 @@ func readAllDocuments(w http.ResponseWriter, r *http.Request) {
 
 	respData := "{ \"data\": [" + strings.Join(documents, ",") + "]}"
 
-	fmt.Println(respData)
 	json.NewEncoder(w).Encode(json.RawMessage(respData))
 }
 
@@ -164,7 +157,11 @@ func updateDocument(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("User does not have permission to modify this")
 	}
 
+	fmt.Println("Document updated!")
+
 	ioutil.WriteFile(("db/collections/" + collection + ".properties"), []byte(p.String()), 0777)
+
+	json.NewEncoder(w).Encode(map[string]bool{"status": true})
 }
 
 // DELETE
@@ -188,6 +185,7 @@ func deleteDocument(w http.ResponseWriter, r *http.Request) {
 
 	ioutil.WriteFile(("db/collections/" + collection + ".properties"), []byte(p.String()), 0777)
 
+	fmt.Println("Document deleted!")
 }
 
 //returns if user has access to said data
@@ -196,7 +194,6 @@ func hasAccess(usrID string) bool {
 
 	p := properties.MustLoadFile("db/users.properties", properties.UTF8)
 	keys := p.Keys()
-	fmt.Println(keys)
 
 	for a := 0; a < len(keys); a++ {
 		val, key := p.Get(keys[a])
@@ -223,11 +220,9 @@ func dictToJson(dict map[string]interface{}) string {
 		hold += fmt.Sprintf("\"%s\":\"%s\",", k, v)
 	}
 
-	fmt.Println(hold)
-
 	hold = strings.TrimSuffix(hold, ",")
 
 	hold += "}"
-	fmt.Println(hold)
+
 	return hold
 }

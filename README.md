@@ -3,3 +3,11 @@
     <img src="./.github/logo.png" width="20%" />
 </p>
 <h2 align="center">An Intuitive database built for rapid prototyping and ease of use!</h2>
+
+## Design Goals 🎨
+
+### Simplicity
+
+###
+
+## Documentation 📝
