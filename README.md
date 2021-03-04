@@ -14,9 +14,31 @@
 
 ### Auth
 
+#### SignUp
+
+When a user signs up, send a POST request to `/signUp` with the following JSON:
+
+```json
+{
+  "username": "username",
+  "password": "password"
+}
+```
+
+Your username and password will be saved (password will be encrypted), and you will be returned with your userid!
+
 #### Login
 
-#### SignUp
+When a user trys to login, send a POST request to `/login` with the following JSON:
+
+```json
+{
+  "username": "username",
+  "password": "password"
+}
+```
+
+If it is successful, you will be returned with your userid, and if not, you'll be returned with a message saying that your password was incorrect or you haven't signed up.
 
 ### Create
 
