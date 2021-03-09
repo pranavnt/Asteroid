@@ -13,7 +13,6 @@
 ## Documentation 📝
 
 ### Auth
-
 #### SignUp
 
 When a user signs up, send a POST request to `/signUp` with the following JSON:
