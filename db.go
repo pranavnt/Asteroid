@@ -70,7 +70,7 @@ func readDocument(w http.ResponseWriter, r *http.Request) {
 	p := properties.MustLoadFile(("db/collections/" + collection + ".properties"), properties.UTF8)
 	val, key := p.Get(doc)
 
-	if key == false {
+	if !key {
 		fmt.Fprintf(w, "does not exist")
 	}
 
@@ -198,7 +198,7 @@ func hasAccess(usrID string) bool {
 	for a := 0; a < len(keys); a++ {
 		val, key := p.Get(keys[a])
 
-		if key == false {
+		if !key {
 			return false
 		}
 

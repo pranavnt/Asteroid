@@ -29,7 +29,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	val, key := p.Get(data["username"].(string))
 
-	if key == false {
+	if !key {
 		fmt.Fprintf(w, "User not registered")
 	}
 
@@ -104,9 +104,5 @@ func hashPassword(password string) (hashedPassword string) {
 func checkPassword(hashedPassword string, guess string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(guess))
 
-	if err != nil {
-		return false
-	}
-
-	return true
+	return err == nil
 }

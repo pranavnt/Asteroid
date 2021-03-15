@@ -12,6 +12,7 @@ import (
 func main() {
 	app := mamba.New()
 	app.AddCommand("start", start)
+	app.AddCommand("init", initialize)
 	app.AddCommand("delete", deleteCollection)
 	app.Run(os.Args)
 }
@@ -40,9 +41,14 @@ func start(params mamba.Dict) {
 
 	log.Fatal(http.ListenAndServe(":5555", r))
 }
+func initialize(params mamba.Dict) {
+	// create db dir
+
+	// create
+}
 
 func deleteCollection(params mamba.Dict) {
 	collectionName := params["collectionName"]
 
-	os.Remove("db/"+collectionName.(string)+".properties")
+	os.Remove("db/" + collectionName.(string) + ".properties")
 }
