@@ -3,11 +3,19 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/pranavnt/mamba"
 )
 
 func main() {
+	app := mamba.New()
+	app.AddCommand("start", start)
+	app.Run(os.Args)
+}
+
+func start(args mamba.Dict) {
 	r := mux.NewRouter()
 
 	// Auth routes
