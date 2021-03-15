@@ -1,4 +1,4 @@
-<h1 align="center">Asteroid</h1> 
+<h1 align="center">Caldera</h1> 
 <p align="center">
     <img src="./.github/logo.png" width="20%" />
 </p>
@@ -6,9 +6,9 @@
 
 ## Installation 💻
 
-1. Clone the repo - `git clone https://github.com/pranavnt/Asteroid && cd Asteroid`
+1. Clone the repo - `git clone https://github.com/pranavnt/caldera && cd caldera`
 2. Install dependencies - `go get`
-3. Build asteroid - `go build asteroid.go`
+3. Build caldera - `go build caldera.go`
 
 ## Documentation 📝
 
@@ -43,7 +43,7 @@ If it is successful, you will be returned with your userid, and if not, you'll b
 
 #### Create a collection
 
-In order to create a collection, run the command `asteroid create collection collectionName` into terminal, as a collection with `collectionName` will be created. This can only be done from the command line for now, but I'm hoping to allow devs to be able to do this through an API in the future.
+In order to create a collection, run the command `caldera create collection collectionName` into terminal, as a collection with `collectionName` will be created. This can only be done from the command line for now, but I'm hoping to allow devs to be able to do this through an API in the future.
 
 #### Create a document
 
@@ -88,7 +88,7 @@ To update an element in a collection, send a POST request to `/api/collection/to
 
 #### Update collection name
 
-To update the name of a collection, run the command `asteroid update collection oldName newName`, where `oldName` is the name of the collection, and `newName` is the new name!
+To update the name of a collection, run the command `caldera update collection oldName newName`, where `oldName` is the name of the collection, and `newName` is the new name!
 
 ### Delete
 
@@ -98,7 +98,7 @@ To delete a document from a collection, send a GET request to `/api/collection/t
 
 #### Delete Collection
 
-To delete a collection, run the command `asteroid delete collection collectionName` into terminal, and the collection with the name `collectionName` will be deleted. You can only do this through the CLI right now, but I'm hoping to make this accessible via an API in the future.
+To delete a collection, run the command `caldera delete collection collectionName` into terminal, and the collection with the name `collectionName` will be deleted. You can only do this through the CLI right now, but I'm hoping to make this accessible via an API in the future.
 
 ## Design Goals 🎨
 

@@ -12,10 +12,11 @@ import (
 func main() {
 	app := mamba.New()
 	app.AddCommand("start", start)
+	app.AddCommand("delete", deleteCollection)
 	app.Run(os.Args)
 }
 
-func start(args mamba.Dict) {
+func start(params mamba.Dict) {
 	r := mux.NewRouter()
 
 	// Auth routes
@@ -38,4 +39,8 @@ func start(args mamba.Dict) {
 	r.HandleFunc("/api/collection/{name}/document/delete/{doc}/{uid}", deleteDocument)
 
 	log.Fatal(http.ListenAndServe(":5555", r))
+}
+
+func deleteCollection(params mamba.Dict) {
+	collectionName := params["collectionName"]
 }

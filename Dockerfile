@@ -7,7 +7,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN go get -v -t -d ./...
-RUN go build -o asteroid .
+RUN go build -o caldera .
 
 EXPOSE 5555
-CMD [ "./asteroid" ]
+CMD [ "./caldera" ]
