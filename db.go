@@ -58,7 +58,7 @@ func createDocument(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("Document created!!")
 
-	fmt.Fprintf(w, id)
+	fmt.Fprint(w, id)
 }
 
 // READ
