@@ -43,4 +43,6 @@ func start(params mamba.Dict) {
 
 func deleteCollection(params mamba.Dict) {
 	collectionName := params["collectionName"]
+
+	os.Remove("db/"+collectionName+".properties")
 }
