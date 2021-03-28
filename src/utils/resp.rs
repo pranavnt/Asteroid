@@ -6,6 +6,10 @@ pub struct CreateDocumentResp {}
 
 pub struct ReadDocumentResp {}
 
+pub struct ReadDocumentByIdResp {}
+
+pub struct ReadDocumentAllResp {}
+
 pub struct UpdateDocumentResp {}
 
 pub struct DeleteDocumentResp {}
