@@ -14,7 +14,7 @@ pub struct Store {
 impl FromDataSimple for Store {
     type Error = String;
 
-    fn from_data(req: &Request, data: Data) -> Outcome<Self, String> {
+    fn from_data(_req: &Request, data: Data) -> Outcome<Self, String> {
         let mut contents = String::new();
 
         if let Err(e) = data.open().take(256).read_to_string(&mut contents) {

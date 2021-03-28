@@ -3,13 +3,12 @@
 #[macro_use]
 extern crate rocket;
 
-use serde_json::{Result, Value};
+use serde_json::Value;
 
 mod utils;
 
 #[post("/process", format = "application/json", data = "<input>")]
 fn process_store(input: utils::store::Store) -> &'static str {
-    println!("{}", input.contents);
     let req_body: Value = utils::json::str_to_json(&String::from(input.contents));
 
     println!("{}",req_body);
