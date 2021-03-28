@@ -9,8 +9,8 @@ mod utils;
 
 #[post("/process", format = "application/json", data = "<input>")]
 fn process_store(input: utils::store::Store) -> &'static str {
-    let v: Value = serde_json::from_str(&input.contents);
-    println!("{}", v["hi"]);
+    println!("{}", input.contents);
+    let req_body:Result<()> = utils::json::str_to_json(&String::from(input.contents));
     "200"
 }
 
