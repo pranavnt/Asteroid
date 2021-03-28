@@ -4,14 +4,14 @@ use rocket::http::Status;
 use rocket::Data;
 use rocket::Outcome::Failure;
 use rocket::Outcome::Success;
-use std::io::Read;
 use rocket::Request;
+use std::io::Read;
 
 pub struct Store {
     pub contents: String,
 }
 
- impl FromDataSimple for Store {
+impl FromDataSimple for Store {
     type Error = String;
 
     fn from_data(req: &Request, data: Data) -> Outcome<Self, String> {
