@@ -1,0 +1,7 @@
+{
+  "adminKey": "admin api key",
+  "publicRead": {
+    "collectionName": true,
+    "collectionName2": false
+  }
+}
