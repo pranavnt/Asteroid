@@ -17,4 +17,3 @@ pub struct DeleteDocumentResp {}
 pub struct CreateCollectionResp {}
 
 pub struct DeleteCollectionResp {}
-
