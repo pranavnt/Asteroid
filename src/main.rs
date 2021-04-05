@@ -17,5 +17,6 @@ fn process_store(input: utils::store::Store) -> &'static str {
 }
 
 fn main() {
+    utils::file::create_collection("test");
     rocket::ignite().mount("/", routes![process_store]).launch();
 }
