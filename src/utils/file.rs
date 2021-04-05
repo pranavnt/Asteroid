@@ -5,11 +5,12 @@ pub fn create_collection(collection_name: &str) {
 }
 
 pub fn get_document(collection_name: &str, doc_id: &str) -> String {
-    return fs::read_to_string(format!("/.db/{}/{}.json", collection_name, doc_id))
+    return fs::read_to_string(format!("./.db/{}/{}.json", collection_name, doc_id))
         .expect("Unable to read file");
 }
 
 pub fn create_document(data: &str, collection_name: &str, doc_id: &str) {
-    fs::write(format!("/.db/{}/{}.json", collection_name, doc_id), data)
+    println!("./.db/{}/{}.json", collection_name, doc_id);
+    fs::write(format!("./.db/{}/{}.json", collection_name, doc_id), data)
         .expect("Unable to write file");
 }

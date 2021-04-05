@@ -11,6 +11,8 @@ mod utils;
 fn process_store(input: utils::store::Store) -> &'static str {
     let req_body: Value = utils::json::str_to_json(&String::from(input.contents));
 
+    utils::file::create_document(&format!("{}",req_body), "test", "hi");
+
     println!("{}", req_body);
 
     "200"
