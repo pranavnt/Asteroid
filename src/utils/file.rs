@@ -10,7 +10,6 @@ pub fn get_document(collection_name: &str, doc_id: &str) -> String {
 }
 
 pub fn create_document(data: &str, collection_name: &str, doc_id: &str) {
-    println!("./.db/{}/{}.json", collection_name, doc_id);
     fs::write(format!("./.db/{}/{}.json", collection_name, doc_id), data)
         .expect("Unable to write file");
 }
