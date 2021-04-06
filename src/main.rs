@@ -18,6 +18,17 @@ fn document_create(input: utils::store::Store) -> &'static str {
     "200"
 }
 
+#[post("/document/get", format = "application/json", data = "<input>")]
+fn document_get(input: utils::store::Store) -> String {
+    let req_body: Value = utils::json::str_to_json(&String::from(input.contents));
+
+    let document = utils::file::get_document("test", "hi");
+
+    println!("{}", req_body);
+
+    document
+}
+
 fn main() {
-    rocket::ignite().mount("/", routes![document_create]).launch();
+    rocket::ignite().mount("/", routes![document_create, document_get]).launch();
 }
