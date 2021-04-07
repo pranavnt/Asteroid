@@ -22,7 +22,7 @@ fn document_create(input: utils::store::Store) -> &'static str {
 fn document_get(input: utils::store::Store) -> String {
     let req_body: Value = utils::json::str_to_json(&String::from(input.contents));
 
-    let document = utils::file::get_document("test", "hi");
+    let document = utils::file::get_document("todos", "hi");
 
     println!("{}", req_body);
 
